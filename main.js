@@ -4,3 +4,11 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
   document.getElementById("input-text").value = "";
   console.log(inputText);
 });
+
+class List {
+  constructor(name, items) {
+    this._name = name;
+    this._items = items || [];
+    this._length = this._items._length;
+  }
+}
