@@ -4,11 +4,12 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
   document.getElementById("input-text").value = "";
   console.log(inputText);
 });
+const TODO_LIST = document.getElementById("todo-list");
 
 class List {
-  constructor(name, items) {
+  constructor(name, listType) {
     this._name = name;
-    this._items = items || [];
+    this._items = JSON.parse(localStorage.getItem(`${listType}`)) || [];
   }
 
   get name() {
@@ -19,12 +20,24 @@ class List {
     return this._items;
   }
 
-  set items(item) {
-    this._items.push(item);
-  }
-
   set name(name) {
     this._name = name;
+  }
+}
+
+class ListItem {
+  constructor(text, done, deleted, createdAt, dueDate) {
+    this._text = text;
+    this._done = done;
+    this._deleted = deleted;
+    this._createdAt = createdAt;
+    this._dueDate = dueDate;
+  }
+
+  display() {
+    this._items.forEach((item) => {
+      console.log(item);
+    });
   }
 }
 
