@@ -2,7 +2,6 @@ document.getElementById("input-form").addEventListener("submit", (event) => {
   event.preventDefault();
   const inputText = document.getElementById("input-text").value;
   document.getElementById("input-text").value = "";
-  console.log(inputText);
 });
 const TODO_LIST = document.getElementById("todo-list");
 
@@ -23,30 +22,58 @@ class List {
   set name(name) {
     this._name = name;
   }
-}
 
-class ListItem {
-  constructor(text, done, deleted, createdAt, dueDate) {
-    this._text = text;
-    this._done = done;
-    this._deleted = deleted;
-    this._createdAt = createdAt;
-    this._dueDate = dueDate;
-  }
+  addItem() {}
 
   display() {
+    TODO_LIST.innerHTML = "";
     this._items.forEach((item) => {
-      console.log(item);
+      TODO_LIST.innerHTML += ``;
     });
   }
 }
 
-const test = new List("test", ["1", 2, 3]);
-console.log(test.name);
-test.name = "dude";
-console.log(test.name);
-test.items = "hi";
-test.items = "hi";
-console.log(test.items);
-console.log(test.items.length);
-console.log(typeof test);
+class ListItem {
+  constructor(text, done, deleted, dueDate) {
+    this._text = text;
+    this._done = done || false;
+    this._deleted = deleted || false;
+    this._createdAt = new Date();
+    this._dueDate = dueDate || null;
+  }
+
+  get text() {
+    return this._text;
+  }
+  get done() {
+    return this._done;
+  }
+  get deleted() {
+    return this._deleted;
+  }
+  get createdAt() {
+    return this._createdAt;
+  }
+  get dueDate() {
+    return this._dueDate;
+  }
+
+  set text(text) {
+    this._text = text;
+  }
+
+  set done(boolean) {
+    this._done = boolean;
+  }
+
+  set dueDate(date) {
+    this._dueDate = date;
+  }
+
+  addToTodoList() {
+    localStorage.setItem("todo-list-classes", JSON.stringify(this));
+  }
+}
+
+const testItem = new ListItem("hello");
+testItem.addToTodoList();
