@@ -1,3 +1,4 @@
+const TODO_LIST = document.getElementById("todo-list");
 class List {
   constructor(name, listType) {
     this._name = name;
@@ -19,6 +20,7 @@ class List {
 
   display() {
     TODO_LIST.innerHTML = "";
+    this._items = JSON.parse(localStorage.getItem(this._listType)) || [];
     this._items.forEach((item) => {
       TODO_LIST.innerHTML += `<li>${item._text}</li>`;
     });
@@ -31,15 +33,20 @@ class List {
     localStorage.setItem(`${this._listType}`, JSON.stringify(ITEMS_TODO_LIST));
   }
 }
-const TODO_LIST = document.getElementById("todo-list");
-const toDoList = new List("todo-list-classes", "todo-list-classes");
-const ITEMS_TODO_LIST = toDoList.items || [];
 
-const clear = () => {
+const toDoList = new List("todo-list-classes", "todo-list-classes");
+let ITEMS_TODO_LIST = toDoList.items || [];
+
+const clear = (listType) => {
   console.clear();
   ITEMS_TODO_LIST = [];
-  localStorage.setItem(`${this._listType}`, JSON.stringify(ITEMS_TODO_LIST));
+  localStorage.setItem(listType, JSON.stringify(ITEMS_TODO_LIST));
+  toDoList.display();
 };
+
+document.getElementById("test").addEventListener("click", () => {
+  clear("todo-list-classes");
+});
 
 document.getElementById("input-form").addEventListener("submit", (event) => {
   event.preventDefault();
