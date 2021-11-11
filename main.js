@@ -22,7 +22,10 @@ class List {
     TODO_LIST.innerHTML = "";
     this._items = JSON.parse(localStorage.getItem(this._listType)) || [];
     this._items.forEach((item) => {
-      TODO_LIST.innerHTML += `<li>${item._text}</li>`;
+      TODO_LIST.innerHTML += `<li>
+      <button onclick="${item.markDone()}">Done</button>
+      <span style"color:${item.done ? "red" : ""}">${item._text}</span>
+      </li>`;
     });
     document.querySelector("#counter").innerHTML = toDoList.items.length;
   }
@@ -94,6 +97,10 @@ class ListItem {
 
   set dueDate(date) {
     this._dueDate = date;
+  }
+
+  markDone() {
+    this._done = !this._done;
   }
 }
 
