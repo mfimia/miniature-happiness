@@ -1,0 +1,6 @@
+#counter {
+  position: absolute;
+  border: 1px solid black;
+  top: 10%;
+  right: 50%;
+}

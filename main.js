@@ -22,6 +22,7 @@ class List {
     this._items.forEach((item) => {
       TODO_LIST.innerHTML += `<li>${item._text}</li>`;
     });
+    document.querySelector("#counter").innerHTML = toDoList.items.length;
   }
 
   addItem(text, done, deleted, dueDate) {
@@ -33,6 +34,12 @@ class List {
 const TODO_LIST = document.getElementById("todo-list");
 const toDoList = new List("todo-list-classes", "todo-list-classes");
 const ITEMS_TODO_LIST = toDoList.items || [];
+
+const clear = () => {
+  console.clear();
+  ITEMS_TODO_LIST = [];
+  localStorage.setItem(`${this._listType}`, JSON.stringify(ITEMS_TODO_LIST));
+};
 
 document.getElementById("input-form").addEventListener("submit", (event) => {
   event.preventDefault();
